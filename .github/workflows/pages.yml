@@ -1,4 +1,4 @@
-name: Deploy static investor demo
+name: Deploy static product demo
 
 on:
   push:

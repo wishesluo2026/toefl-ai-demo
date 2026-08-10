@@ -1,8 +1,8 @@
 {
-  "name": "toefl-investor-demo-static",
+  "name": "toefl-product-demo-static",
   "version": "1.0.0",
   "private": true,
-  "description": "Zero-cost static investor demo for GitHub Pages",
+  "description": "Safe static product interaction demo for GitHub Pages",
   "scripts": {
     "check": "node scripts/check.mjs",
     "serve": "node scripts/serve.mjs"

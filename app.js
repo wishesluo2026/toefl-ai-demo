@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const STORAGE_KEY = "toefl-investor-static-demo-v1";
+  const STORAGE_KEY = "toefl-product-static-demo-v1";
   const SAMPLE_ESSAY =
     "Dear Ms. Lee,\n\nThank you for coordinating Saturday's volunteer event. " +
     "The small team assignments made it easy for new volunteers to understand " +
@@ -125,12 +125,12 @@
     return `
       <div class="page-enter">
         <section class="hero">
-          <div class="eyebrow">Zero-cost interactive preview</div>
+          <div class="eyebrow">AI product interactive demo</div>
           <h1>从 AI 训练到人工校准，一条可操作的产品闭环</h1>
           <p>
-            这是为投资者准备的纯静态交互镜像。它展示学生练习、Mock 报告、
-            运营成本、双盲评分和分歧仲裁；所有数据都在当前浏览器内生成，
-            不连接真实服务，也不会产生模型费用。
+            这是新托福写作 AI 训练与评分平台的安全交互演示，展示学生训练、AI 评分报告、
+            学习画像、成本控制、双盲人工评分与分歧仲裁等核心产品机制。当前演示使用模拟数据，
+            不连接真实生产服务，也不会产生模型费用。
           </p>
           <div class="hero-actions">
             <a class="primary-button" href="#student">开始 5 分钟体验</a>
@@ -138,10 +138,25 @@
           </div>
         </section>
 
+        <section class="section">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow">Product design focus</div>
+              <h2>产品设计重点</h2>
+            </div>
+          </div>
+          <div class="product-design-grid">
+            ${designCard("01", "学习闭环", "入学诊断 → 个性化推荐 → 限时训练 → AI 评分 → 反馈改写 → 画像更新")}
+            ${designCard("02", "AI 可靠性", "结构化输出、强 Schema 校验、异常结果拦截、异步任务、失败恢复")}
+            ${designCard("03", "成本与模型治理", "模型路由、预算预占、费用结算、重复扣费保护")}
+            ${designCard("04", "Human-in-the-loop", "双人盲评、评分分歧、人工仲裁、一致性评估")}
+          </div>
+        </section>
+
         <section class="metrics-grid" aria-label="演示关键指标">
-          ${metric("外部 API 请求", "0", "网络调用已移除")}
-          ${metric("模型费用", "$0", "纯静态 Mock")}
           ${metric("可切换角色", "5", "学生、运营、双评、仲裁")}
+          ${metric("交互页面", "9", "覆盖完整演示路线")}
+          ${metric("外部 API 请求", "0", "网络调用已移除")}
           ${metric("演示完成度", `${completed}/4`, "状态仅保存在本机")}
         </section>
 
@@ -149,8 +164,8 @@
           <div class="section-heading">
             <div>
               <div class="eyebrow">Guided tour</div>
-              <h2>建议演示路线</h2>
-              <p>按顺序操作，可以在约五分钟内讲清产品价值、可靠性与成本边界。</p>
+              <h2>建议体验路线</h2>
+              <p>按顺序体验，可在约 5 分钟内了解核心学习闭环、AI 评分机制、成本控制及人工校准设计。</p>
             </div>
           </div>
           <div class="role-grid">
@@ -188,6 +203,16 @@
         <p>${description}</p>
         <span class="role-cta">进入演示 →</span>
       </a>
+    `;
+  }
+
+  function designCard(number, title, description) {
+    return `
+      <article class="feature-card">
+        <span class="role-number">${number}</span>
+        <h3>${title}</h3>
+        <p>${description}</p>
+      </article>
     `;
   }
 
@@ -302,7 +327,7 @@
                 载入虚构示例
               </button>
               <button class="primary-button" type="button" data-action="complete-practice">
-                生成零费用 Mock 报告
+                生成 Mock 评分报告
               </button>
             </div>
           </article>
@@ -354,7 +379,7 @@
               <div class="score-ring-inner"><div><strong>4</strong><small>Band / 5</small></div></div>
             </div>
             <div>
-              <span class="tag tag--purple">mock-investor-demo</span>
+              <span class="tag tag--purple">mock-product-demo</span>
               <h2>任务回应完整，细节清晰，语气得体</h2>
               <p>
                 示例邮件覆盖感谢、有效环节和改进建议。下一步重点是增加更具体的影响说明，
@@ -625,24 +650,39 @@
             <span class="tag tag--green">透明披露</span>
           </div>
         </section>
+        <section class="card-grid card-grid--three boundary-grid">
+          ${boundaryCard("当前交互演示", "演示层", [
+            "GitHub Pages 静态页面",
+            "使用模拟数据",
+            "不连接外部 API",
+            "不产生模型费用",
+          ])}
+          ${boundaryCard("当前项目已经完成 / 验证的能力", "项目能力", [
+            "本地 MVP 核心学习闭环",
+            "异步评分、Schema 校验与失败恢复",
+            "API 成本账本、预算预占与费用结算",
+            "双盲评分及分歧仲裁工具",
+            "隔离 staging 真实模型链路验证",
+          ])}
+          ${boundaryCard("下一阶段验证", "待验证", [
+            "人工评分数据积累",
+            "AI 与人工评分一致性验证",
+            "小规模封闭测试",
+            "生产环境验收",
+          ])}
+        </section>
         <section class="panel">
-          <table class="comparison-table">
-            <thead>
-              <tr><th>能力</th><th>本静态演示</th><th>当前项目后端</th><th>投资者应如何理解</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>AI 评分</td><td>预置 Mock 结果</td><td>已具备异步评分与失败恢复</td><td>静态版不验证模型质量</td></tr>
-              <tr><td>API 费用</td><td>不发请求，固定为 0</td><td>具备用量账本、预占和结算</td><td>演示不会产生 Anthropic 费用</td></tr>
-              <tr><td>个性化推荐</td><td>预置画像和推荐变化</td><td>已实现基础推荐闭环</td><td>静态版展示交互方式</td></tr>
-              <tr><td>双盲评分</td><td>浏览器本地状态机</td><td>已实现账号、任务、盲评和仲裁</td><td>流程可演示，数据均为虚构</td></tr>
-              <tr><td>人工校准结论</td><td>不提供准确率结论</td><td>仍需真实评分员样本校准</td><td>不能宣称已与官方评分员一致</td></tr>
-              <tr><td>数据存储</td><td>仅 localStorage</td><td>支持数据库持久化</td><td>刷新可保留，重置可清除</td></tr>
-            </tbody>
-          </table>
+          <div class="card-title-row">
+            <div>
+              <strong>阶段说明</strong>
+              <p>当前未宣称正式上线、真实用户运营数据或已验证的评分准确率；静态演示中的分数与进度均为模拟信息。</p>
+            </div>
+            <span class="tag">如实展示</span>
+          </div>
         </section>
         <section class="card-grid card-grid--three">
           ${featureCard("安全", "没有密钥、用户数据、外部脚本、追踪器或后端地址。")}
-          ${featureCard("可分享", "发布为 GitHub Pages 后，投资者只需浏览器即可访问。")}
+          ${featureCard("可分享", "发布为 GitHub Pages 后，可通过浏览器直接体验产品交互。")}
           ${featureCard("可复位", "所有操作状态均可一键恢复，不影响任何真实环境。")}
         </section>
       </div>
@@ -651,6 +691,16 @@
 
   function featureCard(title, description) {
     return `<article class="feature-card"><span class="role-number">✓</span><h3>${title}</h3><p>${description}</p></article>`;
+  }
+
+  function boundaryCard(title, label, items) {
+    return `
+      <article class="feature-card boundary-card">
+        <span class="tag tag--purple">${label}</span>
+        <h3>${title}</h3>
+        <ul class="check-list">${items.map((item) => `<li>${item}</li>`).join("")}</ul>
+      </article>
+    `;
   }
 
   function renderEmpty(title, description, actionLabel, route) {
@@ -692,7 +742,7 @@
       architecture: renderArchitecture,
     };
     app.innerHTML = pages[route]();
-    document.title = `${navItems.find(([key]) => key === route)[1]} · 新托福写作投资者演示`;
+    document.title = `${navItems.find(([key]) => key === route)[1]} · 新托福写作产品演示`;
   }
 
   function resetDemo() {

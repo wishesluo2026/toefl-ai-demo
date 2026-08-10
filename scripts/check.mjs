@@ -18,16 +18,31 @@ for (const file of requiredFiles) {
 const html = await readFile(resolve(root, "index.html"), "utf8");
 const css = await readFile(resolve(root, "styles.css"), "utf8");
 const js = await readFile(resolve(root, "app.js"), "utf8");
+const readme = await readFile(resolve(root, "README.md"), "utf8");
 
 const requiredHtml = [
   'href="./styles.css"',
   'src="./app.js"',
-  'content="noindex, nofollow"',
-  "零费用 Mock",
-  "纯虚构数据",
+  "新托福写作 AI 训练与评分平台 · 产品演示",
+  "Product Demo",
+  "安全演示环境",
+  "模拟数据",
+  "产品体验路线",
 ];
 for (const token of requiredHtml) {
   if (!html.includes(token)) throw new Error(`Missing HTML contract: ${token}`);
+}
+
+if (/noindex|nofollow/i.test(html)) {
+  throw new Error("Public portfolio demo must remain indexable");
+}
+
+for (const token of ["产品设计重点", "当前交互演示", "当前项目已经完成 / 验证的能力", "下一阶段验证"]) {
+  if (!js.includes(token)) throw new Error(`Missing product demo contract: ${token}`);
+}
+
+if (/投资者|Investor Preview/i.test(`${html}\n${js}\n${readme}`)) {
+  throw new Error("Legacy investor-facing copy remains in public content");
 }
 
 const requiredRoutes = [
