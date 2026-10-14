@@ -11,7 +11,8 @@
     "and useful.\n\nBest regards,\nAlex";
 
   const navItems = [
-    ["overview", "总览"],
+    ["overview", "作品集总览"],
+    ["tour", "5分钟体验导览"],
     ["student", "学生工作台"],
     ["practice", "练习与 Mock 评分"],
     ["report", "评分报告"],
@@ -20,6 +21,8 @@
     ["rater-b", "评分员 B"],
     ["adjudication", "分歧仲裁"],
     ["architecture", "能力边界"],
+    ["decisions", "产品决策"],
+    ["evidence", "验证证据"],
   ];
 
   const defaults = Object.freeze({
@@ -121,73 +124,7 @@
   }
 
   function renderOverview() {
-    const completed = completionCount();
-    return `
-      <div class="page-enter">
-        <section class="hero">
-          <div class="eyebrow">AI product interactive demo</div>
-          <h1>从 AI 训练到人工校准，一条可操作的产品闭环</h1>
-          <p>
-            这是新托福写作 AI 训练与评分平台的安全交互演示，展示学生训练、AI 评分报告、
-            学习画像、成本控制、双盲人工评分与分歧仲裁等核心产品机制。当前演示使用模拟数据，
-            不连接真实生产服务，也不会产生模型费用。
-          </p>
-          <div class="hero-actions">
-            <a class="primary-button" href="#student">开始 5 分钟体验</a>
-            <a class="secondary-button" href="#architecture">先看能力边界</a>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section-heading">
-            <div>
-              <div class="eyebrow">Product design focus</div>
-              <h2>产品设计重点</h2>
-            </div>
-          </div>
-          <div class="product-design-grid">
-            ${designCard("01", "学习闭环", "入学诊断 → 个性化推荐 → 限时训练 → AI 评分 → 反馈改写 → 画像更新")}
-            ${designCard("02", "AI 可靠性", "结构化输出、强 Schema 校验、异常结果拦截、异步任务、失败恢复")}
-            ${designCard("03", "成本与模型治理", "模型路由、预算预占、费用结算、重复扣费保护")}
-            ${designCard("04", "Human-in-the-loop", "双人盲评、评分分歧、人工仲裁、一致性评估")}
-          </div>
-        </section>
-
-        <section class="metrics-grid" aria-label="演示关键指标">
-          ${metric("可切换角色", "5", "学生、运营、双评、仲裁")}
-          ${metric("交互页面", "9", "覆盖完整演示路线")}
-          ${metric("外部 API 请求", "0", "网络调用已移除")}
-          ${metric("演示完成度", `${completed}/4`, "状态仅保存在本机")}
-        </section>
-
-        <section class="section">
-          <div class="section-heading">
-            <div>
-              <div class="eyebrow">Guided tour</div>
-              <h2>建议体验路线</h2>
-              <p>按顺序体验，可在约 5 分钟内了解核心学习闭环、AI 评分机制、成本控制及人工校准设计。</p>
-            </div>
-          </div>
-          <div class="role-grid">
-            ${roleCard("01", "学生训练闭环", "查看推荐、完成一篇练习并生成预置 Mock 报告。", "student", state.practiceCompleted)}
-            ${roleCard("02", "运营与成本保护", "查看零 Token 账本、环境隔离与自动化覆盖。", "operations", true)}
-            ${roleCard("03", "双盲人工评分", "由 A、B 两名评分员独立提交 Band，互不可见。", "rater-a", state.raterA !== null && state.raterB !== null)}
-            ${roleCard("04", "分歧仲裁", "评分不一致时进入仲裁，并回写运营进度。", "adjudication", state.adjudicated !== null)}
-            ${roleCard("05", "技术能力边界", "区分静态演示、已验证后端与尚待生产验证的能力。", "architecture", true)}
-          </div>
-        </section>
-
-        <section class="section panel panel--safe">
-          <div class="card-title-row">
-            <div>
-              <strong>隐私与费用承诺</strong>
-              <p>本页面没有账号系统、追踪脚本、表单提交或外部资源。</p>
-            </div>
-            <span class="tag tag--green">浏览器本地</span>
-          </div>
-        </section>
-      </div>
-    `;
+    return "\n<div class=\"page-enter\">\n  <section class=\"portfolio-hero\">\n    <div class=\"portfolio-kicker\"><span>AI PRODUCT CASE STUDY</span><span class=\"tag tag--green\">独立产品作品集 · 公开Mock</span></div>\n    <h1>让 AI 写作反馈从一次性评分，变成可持续的个性化训练</h1>\n    <p class=\"portfolio-lead\">新托福 AI 写作训练与评分平台：围绕学习者“诊断不清楚、反馈难执行、训练缺少连续性”的问题，设计诊断、训练、评分、反馈、画像与人工校准相结合的 SaaS 产品方案。</p>\n    <div class=\"portfolio-metadata\">\n      <div><span>项目角色</span><strong>个人项目负责人 · 产品规划 / AI 协作研发 / 验收</strong></div>\n      <div><span>项目阶段</span><strong>本地核心 MVP 已完成 · 校准及封闭测试准备中</strong></div>\n      <div><span>演示性质</span><strong>静态 Mock · 不运行真实模型 · 不收集作文</strong></div>\n    </div>\n    <div class=\"hero-actions\">\n      <a class=\"primary-button\" href=\"#tour\">开始 5 分钟作品集导览 →</a>\n      <a class=\"secondary-button\" href=\"#decisions\">看 3 个关键产品决策</a>\n    </div>\n    <p class=\"micro-disclaimer\">这是独立的公开演示环境，不是生产 SaaS。页面中的分数、画像、Token、费用及完成状态均为演示数据。</p>\n  </section>\n  <section class=\"section\">\n    <div class=\"section-heading\"><div><div class=\"eyebrow\">Problem → Product → Validation</div><h2>我如何从业务问题走向 AI 产品</h2><p>招聘经理无需理解复杂后端代码，也能快速看到需求、方案、关键取舍和验证边界。</p></div></div>\n    <div class=\"case-triad\">\n      <article class=\"panel\"><span class=\"case-index\">01 / 用户问题</span><h3>评分之后，学生下一步练什么？</h3><p>来自托福内容账号 1000+ 粉丝及累计 100+ 次相关咨询的需求观察；这些不是本平台活跃或付费用户数据。</p></article>\n      <article class=\"panel\"><span class=\"case-index\">02 / 产品方案</span><h3>构建可反复使用的训练闭环</h3><p>把入学诊断、题型练习、结构化评分、可执行反馈、学习画像和推荐连接起来，而不是只返回一次 AI 文本。</p></article>\n      <article class=\"panel\"><span class=\"case-index\">03 / 验证路径</span><h3>先验证可用与可靠，再谈评分准确率</h3><p>核心 MVP 已实现，持续通过测试、人工双盲校准、仲裁和版本门禁治理质量；评分效果与真实用户留存尚待验证。</p></article>\n    </div>\n  </section>\n  <section class=\"section\">\n    <div class=\"section-heading\"><div><div class=\"eyebrow\">Product walkthrough</div><h2>先体验产品，再看为什么这样设计</h2></div></div>\n    <div class=\"portfolio-entry-grid\">\n      <a class=\"portfolio-entry\" href=\"#student\"><span>01 · 学生视角</span><strong>练习 → Mock 报告 → 画像</strong><p>了解训练反馈和推荐如何连成闭环</p><b>进入演示 →</b></a>\n      <a class=\"portfolio-entry\" href=\"#rater-a\"><span>02 · 人工校准</span><strong>双盲评分 → 分歧仲裁</strong><p>模拟公平的评分流程和角色状态</p><b>进入演示 →</b></a>\n      <a class=\"portfolio-entry\" href=\"#decisions\"><span>03 · 产品负责人视角</span><strong>业务问题 → 决策与取舍</strong><p>异步评分、人工校准、成本治理</p><b>查看案例 →</b></a>\n      <a class=\"portfolio-entry\" href=\"#evidence\"><span>04 · 交付验证</span><strong>已验证证据 → 待验证风险</strong><p>区分历史 CI 基线和当前进行中的工作</p><b>查看证据 →</b></a>\n    </div>\n  </section>\n  <section class=\"section\">\n    <div class=\"section-heading\"><div><div class=\"eyebrow\">Product design focus</div><h2>产品设计重点</h2></div></div>\n    <div class=\"product-design-grid\">\n      <article class=\"feature-card\"><span class=\"role-number\">01</span><h3>学习闭环</h3><p>诊断 → 推荐 → 限时训练 → AI 反馈 → 画像更新</p></article>\n      <article class=\"feature-card\"><span class=\"role-number\">02</span><h3>AI 可靠性</h3><p>结构化输出、Schema 校验、异步评分、失败恢复</p></article>\n      <article class=\"feature-card\"><span class=\"role-number\">03</span><h3>成本与模型治理</h3><p>模型路由、预算预占、费用结算与幂等保护</p></article>\n      <article class=\"feature-card\"><span class=\"role-number\">04</span><h3>Human-in-the-loop</h3><p>人工双盲评分、分歧仲裁与一致性评估机制</p></article>\n    </div>\n  </section>\n  <section class=\"section panel panel--safe\">\n    <div class=\"card-title-row\"><div><strong>公开页面只展示流程，不调用真实评分服务</strong><p>没有登录、真实身份、生产数据、外部模型请求或额外费用。实际项目能力与待验证事项请查看“验证证据”。</p></div><span class=\"tag tag--green\">0 外部 API 请求</span></div>\n  </section>\n</div>";
   }
 
   function roleCard(number, title, description, route, done) {
@@ -216,21 +153,28 @@
     `;
   }
 
+  function renderTour() { return "\n<div class=\"page-enter\">\n  <header class=\"page-heading\"><div><div class=\"eyebrow\">Recruiter-friendly walkthrough</div><h1>5 分钟看懂这个 AI 产品</h1><p>按建议顺序体验：先看业务与交互，再了解设计取舍和验证证据。不需要账号或真实模型。</p></div></header>\n  <section class=\"panel tour-intro\"><strong>你将看到什么？</strong><p>这是一个公开、可复位的模拟产品流程。面试官可以快速了解候选人作为个人产品负责人的工作，而不把 Mock 效果误认为正式评分质量。</p></section>\n  <section class=\"tour-steps\">\n    <article class=\"tour-step\"><span class=\"tour-time\">01 · 1 分钟</span><div><h2>理解产品为什么存在</h2><p>从托福学习中的评分可信度和反馈可执行性问题出发，了解MVP范围。</p></div><a class=\"secondary-button\" href=\"#overview\">产品定位 →</a></article>\n    <article class=\"tour-step\"><span class=\"tour-time\">02 · 1 分钟</span><div><h2>体验学生训练闭环</h2><p>查看模拟学习画像，载入虚构示例作文，体验预置 Mock 反馈。</p></div><a class=\"secondary-button\" href=\"#student\">学生工作台 →</a></article>\n    <article class=\"tour-step\"><span class=\"tour-time\">03 · 1 分钟</span><div><h2>体验人工校准</h2><p>评分员 A 与 B 先后提交模拟独立评分，随后体验分歧仲裁。</p></div><a class=\"secondary-button\" href=\"#rater-a\">双盲评分 →</a></article>\n    <article class=\"tour-step\"><span class=\"tour-time\">04 · 1 分钟</span><div><h2>理解关键产品取舍</h2><p>为什么需要异步任务、人工评分、成本账本？看业务问题和方案之间的关系。</p></div><a class=\"secondary-button\" href=\"#decisions\">产品决策 →</a></article>\n    <article class=\"tour-step\"><span class=\"tour-time\">05 · 1 分钟</span><div><h2>检查验证证据与边界</h2><p>区分已验收版本、进行中的数据库并发治理，以及未验证的用户与评分指标。</p></div><a class=\"secondary-button\" href=\"#evidence\">交付证据 →</a></article>\n  </section>\n  <div class=\"alert alert--neutral\">提示：本导览不需要填写真实作文。建议使用“载入虚构示例”，避免误将预设报告理解为模型评分。</div>\n</div>"; }
+
+  function renderDecisions() { return "\n<div class=\"page-enter\">\n  <header class=\"page-heading\"><div><div class=\"eyebrow\">Product decisions / Trade-offs</div><h1>3 个影响产品可用性的关键决策</h1><p>展示的不只是技术选型，而是从用户问题、风险约束到设计取舍、验证方式的完整判断。</p></div></header>\n  <section class=\"decision-list\">\n    <article class=\"panel decision-case\">\n      <div class=\"decision-head\"><span class=\"case-index\">DECISION 01</span><span class=\"tag tag--purple\">体验与可靠性</span></div>\n      <h2>评分为什么要异步，而不是让用户一直等待？</h2>\n      <div class=\"decision-grid\">\n        <div><h3>业务问题</h3><p>模型调用可能超时、重试或失败；同步阻塞使用户难以判断作文是否提交成功。</p></div>\n        <div><h3>我的产品选择</h3><p>设计评分任务状态、异步结果反馈、幂等提交、自动重试和失败恢复，减少用户的不确定性及重复扣费风险。</p></div>\n        <div><h3>取舍与边界</h3><p>异步流程增加任务状态与异常恢复复杂度，需要明确“处理中 / 成功 / 失败”的交互和验收条件。</p></div>\n        <div><h3>如何验证</h3><p>以关键链路测试和失败场景验收验证流程；用户真实等待体验与性能指标仍需封闭测试。</p></div>\n      </div>\n    </article>\n    <article class=\"panel decision-case\">\n      <div class=\"decision-head\"><span class=\"case-index\">DECISION 02</span><span class=\"tag tag--purple\">AI可信度</span></div>\n      <h2>为什么不能把 AI 给出的分数直接当作可靠成绩？</h2>\n      <div class=\"decision-grid\">\n        <div><h3>业务问题</h3><p>流畅的AI评语不一定等于稳定或与人工评分一致的判断，尤其在跨题型和边界分数场景中。</p></div>\n        <div><h3>我的产品选择</h3><p>设计双盲人工评分、评分差异仲裁、正式数据集治理与训练/验证隔离，形成可追溯的校准流程。</p></div>\n        <div><h3>取舍与边界</h3><p>人工评估提高成本和流程复杂度，但在对外宣称评分质量前必须先解决证据充分性问题。</p></div>\n        <div><h3>如何验证</h3><p>展示双盲与仲裁的模拟交互；正式评分一致性数据、统计充分性与发布审批尚未完成。</p></div>\n      </div>\n    </article>\n    <article class=\"panel decision-case\">\n      <div class=\"decision-head\"><span class=\"case-index\">DECISION 03</span><span class=\"tag tag--purple\">成本与系统治理</span></div>\n      <h2>怎样避免模型重试、复核和重复提交带来失控的费用？</h2>\n      <div class=\"decision-grid\">\n        <div><h3>业务问题</h3><p>异步评分和复核模型可能产生额外调用，失败重试与重复请求还会增加费用及账务不一致风险。</p></div>\n        <div><h3>我的产品选择</h3><p>引入默认/复核模型路由、请求幂等、预算预占、费用结算与异常账本治理，明确成本边界。</p></div>\n        <div><h3>取舍与边界</h3><p>不能单纯为了低价牺牲反馈质量；当前先验证账务正确性，再通过真实数据评估最优调用策略。</p></div>\n        <div><h3>如何验证</h3><p>本公开页面只展示零Token模拟账本；真实成本节约率和规模化运营效益尚无足够数据支持。</p></div>\n      </div>\n    </article>\n  </section>\n  <section class=\"panel panel--safe\"><strong>个人项目中的分工说明</strong><p>本人负责需求、MVP范围、产品机制、开发任务编排、关键逻辑复核与阶段验收；借助 Codex / Claude Code 等工具参与代码实现，不将AI辅助开发等同于独立手写全部工程代码。</p></section>\n</div>"; }
+
+  function renderEvidence() { return "\n<div class=\"page-enter\">\n  <header class=\"page-heading\"><div><div class=\"eyebrow\">Delivery evidence / Truthful claims</div><h1>哪些已经验证，哪些还不能宣称成功？</h1><p>将公开演示、项目实际实现、历史CI证据和仍在治理中的事项分开呈现，避免把绿色测试误认为正式产品发布许可。</p></div></header>\n  <section class=\"proof-metrics\">\n    <div class=\"metric-card\"><div class=\"metric-label\">已验收历史CI基线</div><div class=\"metric-value\">6 / 6</div><div class=\"metric-detail\">Jobs PASS · B3-B1历史版本</div></div>\n    <div class=\"metric-card\"><div class=\"metric-label\">历史后端自动化测试</div><div class=\"metric-value\">561</div><div class=\"metric-detail\">PASS · 0 SKIP / 0 FAIL</div></div>\n    <div class=\"metric-card\"><div class=\"metric-label\">历史核心端到端测试</div><div class=\"metric-value\">8</div><div class=\"metric-detail\">PASS · 不代表当前全部改动通过</div></div>\n    <div class=\"metric-card\"><div class=\"metric-label\">Partner Sandbox E2E</div><div class=\"metric-value\">4</div><div class=\"metric-detail\">PASS · 历史已验收基线</div></div>\n  </section>\n  <section class=\"panel panel--safe\">\n    <div class=\"card-title-row\"><div><strong>历史CI证据的确切边界</strong><p>对应主项目 B3-B1 已验收版本，Commit：<code>21debd09152efbbf379adf83c4c426302cb453ea</code>，Run ID：<code>38339162342</code>。这不是当前未验收改动的测试结论。</p></div><span class=\"tag tag--green\">历史版本已验收</span></div>\n  </section>\n  <section class=\"evidence-grid\">\n    <article class=\"panel\"><span class=\"tag tag--green\">已实现 / 已验证</span><h2>产品与基础能力</h2><ul class=\"check-list\"><li>本地核心MVP学习闭环</li><li>异步评分与结构化结果校验</li><li>成本账本、预算预占及费用结算机制</li><li>双盲评分和分歧仲裁工具</li><li>隔离Staging环境的真实模型链路验证</li></ul></article>\n    <article class=\"panel\"><span class=\"tag tag--amber\">进行中 / 未完成</span><h2>质量与发布门禁</h2><ul class=\"check-list\"><li>删除生命周期安全与PostgreSQL并发验收</li><li>人工评分样本的正式数据积累</li><li>模型-人工一致性与充分性验证</li><li>小规模封闭用户测试</li><li>生产环境和正式发布审批</li></ul></article>\n    <article class=\"panel\"><span class=\"tag\">没有宣称</span><h2>尚无充分证据的结果</h2><ul class=\"check-list\"><li>已规模化上线或拥有真实付费用户</li><li>托福官方评分或准确率已认证</li><li>真实用户留存率、转化率与收入</li><li>评分提升或成本节约的真实量化效果</li></ul></article>\n  </section>\n  <section class=\"panel evidence-note\"><h2>作品集证据如何阅读</h2><p><strong>模拟交互：</strong>本页面里的分数、画像、订单及人工评分状态均为虚构数据，仅用于解释产品逻辑。</p><p><strong>工程证明：</strong>历史CI数据来自上述确定的提交，后续阶段需以新提交实际测试结果为准。</p><p><strong>开发责任：</strong>个人负责产品需求、设计取舍和AI辅助交付验收；不声称商业化运营或独立完成全部技术研发。</p></section>\n  <div class=\"inline-actions\"><a class=\"primary-button\" href=\"#decisions\">继续看产品决策 →</a><a class=\"secondary-button\" href=\"#architecture\">查看演示与生产边界</a></div>\n</div>"; }
+
   function renderStudent() {
     return `
       <div class="page-enter">
         ${pageHeading(
           "Student workspace",
           "学生学习工作台",
-          "把诊断结果转化为推荐练习，让每次完成练习后都更新学习画像。",
+          "体验诊断、推荐与反馈如何形成闭环。本页所有Band、推荐比例、学习天数与画像变化均为模拟展示，不是真实评测结果。",
           '<a class="primary-button" href="#practice">开始推荐练习</a>',
         )}
 
+        <div class="alert alert--neutral">演示说明：数据均为虚构画像。提交练习后显示的Band变化是预设动画式状态，不代表一次练习后实际提升。</div>
         <section class="metrics-grid">
-          ${metric("当前能力 Band", state.practiceCompleted ? "4.0" : "3.5", state.practiceCompleted ? "本次练习后 +0.5" : "基于演示画像")}
-          ${metric("本周练习", state.practiceCompleted ? "4" : "3", "目标 5 篇")}
-          ${metric("连续学习", "6 天", "高于演示基线")}
-          ${metric("推荐匹配度", "92%", "聚焦论证展开")}
+          ${metric("模拟能力 Band", state.practiceCompleted ? "4.0" : "3.5", state.practiceCompleted ? "本次练习后 +0.5" : "基于演示画像")}
+          ${metric("模拟本周练习", state.practiceCompleted ? "4" : "3", "目标 5 篇")}
+          ${metric("模拟连续学习", "6 天", "高于演示基线")}
+          ${metric("模拟推荐匹配度", "92%", "虚构数值，不代表实际算法效果")}
         </section>
 
         <section class="card-grid">
@@ -254,7 +198,7 @@
           <article class="panel">
             <div class="card-title-row">
               <h2>能力画像</h2>
-              <span class="tag">动态更新</span>
+              <span class="tag">模拟变化</span>
             </div>
             <div class="progress-list">
               ${progress("任务完成度", 88)}
@@ -303,7 +247,7 @@
         ${pageHeading(
           "Practice",
           "完成一篇推荐练习",
-          "输入内容只存在于当前页面内。静态版不会分析或上传文本，提交后展示预置的 Band 4 Mock 报告。",
+          "本公开演示不分析输入内容；无论输入什么，都会展示同一份虚构样例的 Band 4 Mock 报告。建议载入示例作文体验。",
         )}
         <section class="practice-layout">
           <article class="panel">
@@ -321,13 +265,13 @@
                 spellcheck="false"
               ></textarea>
             </label>
-            <div class="privacy-line">内容不会离开当前浏览器，也不会被持久保存。</div>
+            <div class="privacy-line">请勿输入真实个人信息。所写内容不上传或持久保存，且不会参与评分；报告仅是预置Mock。</div>
             <div class="inline-actions">
               <button class="secondary-button" type="button" data-action="load-sample">
                 载入虚构示例
               </button>
               <button class="primary-button" type="button" data-action="complete-practice">
-                生成 Mock 评分报告
+                查看预置 Mock 报告
               </button>
             </div>
           </article>
@@ -373,6 +317,7 @@
           '<a class="secondary-button" href="#student">返回工作台</a>',
         )}
 
+        <div class="alert alert--neutral"><strong>固定模拟报告：</strong>下方Band 4及反馈文字均为预置示例，不会根据你刚才输入的作文动态变化，也不能证明评分准确率。</div>
         <section class="panel panel--accent">
           <div class="score-summary">
             <div class="score-ring">
@@ -510,10 +455,10 @@
         ${pageHeading(
           "Double-blind rating",
           `${name} · 独立盲评`,
-          "评分员只能看到题目与虚构作文；提交前后均不能看到 AI Band 或另一位评分员的结果。",
+          "当前仅模拟角色切换与评分隐藏规则，不含真实登录、权限管理或身份隔离。所有评分对象均为虚构示例。",
         )}
         <div class="alert alert--neutral">
-          双盲规则正在模拟：${otherScore === null ? "另一位评分员的状态和分数均被隐藏。" : "另一位评分已提交，但分数仍保持隐藏。"}
+          模拟双盲流程（非真实权限隔离）：${otherScore === null ? "另一位评分员的状态和分数均被隐藏。" : "另一位评分已提交，但分数仍保持隐藏。"}
         </div>
         <article class="task-card">
           <div class="task-meta">
@@ -589,7 +534,7 @@
         ${pageHeading(
           "Senior adjudication",
           "分歧样本人工仲裁",
-          "只有在两份独立评分均提交且结果不一致时，仲裁员才会看到双方分数。",
+          "这是公开Mock仲裁规则演示：两次模拟独立评分结果不一致时显示双方分数，不涉及真实仲裁权限。",
           '<a class="secondary-button" href="#operations">查看运营进度</a>',
         )}
         <section class="card-grid">
@@ -732,6 +677,9 @@
     renderNav(route);
     const pages = {
       overview: renderOverview,
+      tour: renderTour,
+      decisions: renderDecisions,
+      evidence: renderEvidence,
       student: renderStudent,
       practice: renderPractice,
       report: renderReport,

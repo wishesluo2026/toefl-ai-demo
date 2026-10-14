@@ -37,7 +37,7 @@ if (/noindex|nofollow/i.test(html)) {
   throw new Error("Public portfolio demo must remain indexable");
 }
 
-for (const token of ["产品设计重点", "当前交互演示", "当前项目已经完成 / 验证的能力", "下一阶段验证"]) {
+for (const token of ["产品设计重点", "当前交互演示", "当前项目已经完成 / 验证的能力", "下一阶段验证", "5 分钟看懂这个 AI 产品", "3 个影响产品可用性的关键决策", "哪些已经验证"]) {
   if (!js.includes(token)) throw new Error(`Missing product demo contract: ${token}`);
 }
 
@@ -55,6 +55,9 @@ const requiredRoutes = [
   "rater-b",
   "adjudication",
   "architecture",
+  "tour",
+  "decisions",
+  "evidence",
 ];
 for (const route of requiredRoutes) {
   if (!js.includes(`"${route}"`)) throw new Error(`Missing route: ${route}`);
